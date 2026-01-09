@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Sulawesi Selatan - Negeri Seribu Benteng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Karla:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0054A6;
+            --secondary: #E53E3E;
+            --accent: #D4AF37;
+            --dark: #1A365D;
+            --light: #F7FAFC;
+            --white: #FFFFFF;
+            --gray-light: #EDF2F7;
+            --gray: #718096;
+        }
+
+        body {
+            font-family: 'Karla', sans-serif;
+            color: #2D3748;
+            background: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Page Management */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header - Sesuai Website Resmi */
+        header {
+            background: var(--white);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo img {
+            height: 70px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtext {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 400;
+            margin-top: -5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            position: relative;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero - Beranda dengan Carousel Background */
+        .hero {
+            min-height: 90vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 5%;
+        }
+
+        /* Carousel sebagai background */
+        .carousel-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 84, 166, 0.85) 0%, rgba(26, 54, 93, 0.8) 100%);
+        }
+
+        /* Content di atas carousel */
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 4rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero-welcome {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            animation: fadeInUp 1s ease-out 0.1s both;
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 1.2rem 3.5rem;
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            animation: fadeInUp 1s ease-out 0.9s both;
+            margin-top: 1rem;
+            box-shadow: 0 8px 20px rgba(0,84,166,0.3);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,84,166,0.4);
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            max-width: 800px;
+        }
+
+        /* Government Section */
+        .gov-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 992px) {
+            .gov-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .gov-info {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border: 1px solid var(--gray-light);
+        }
+
+        .gov-structure {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: var(--white);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .gov-leader {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .gov-leader-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .gov-leader-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gov-leader h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+
+        .gov-leader p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gov-leader .period {
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+        }
+
+        /* Map Section - Halaman Peta dengan Google Maps */
+        .map-page {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 1400px;
+            border: 1px solid var(--gray-light);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .map-container {
+            background: var(--gray-light);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            border: 1px solid #E2E8F0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #google-map {
+            width: 100%;
+            height: 600px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #E2E8F0;
+        }
+
+        .map-info {
+            background: var(--white);
+            color: var(--dark);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border: 1px solid #E2E8F0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .map-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .map-info p {
+            color: var(--gray);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Region Selector */
+        .region-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .region-btn {
+            padding: 0.6rem 1.2rem;
+            background: var(--white);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .region-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .region-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* News Section */
+        .news-section {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 2rem auto;
+            border: 1px solid var(--gray-light);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .news-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid var(--gray-light);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+
+        .news-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2));
+        }
+
+        .news-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-date {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .news-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-excerpt {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            font-size: 0.95rem;
+        }
+
+        .read-more:hover {
+            color: var(--secondary);
+            gap: 0.8rem;
+        }
+
+        /* Potensi Daerah Section */
+        .potensi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .potensi-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid var(--gray-light);
+        }
+
+        .potensi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+
+        .potensi-image {
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .potensi-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0, 84, 166, 0.1), rgba(0, 84, 166, 0.3));
+        }
+
+        .potensi-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.95);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            z-index: 1;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .potensi-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .potensi-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .potensi-list {
+            list-style: none;
+            margin: 0.5rem 0;
+            flex-grow: 1;
+        }
+
+        .potensi-list li {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .potensi-list li:before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Pariwisata Section */
+        .pariwisata-content {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 3rem;
+            margin: 2rem auto;
+            border: 1px solid var(--gray-light);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .tourism-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tourism-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid var(--gray-light);
+        }
+
+        .tourism-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+
+        .tourism-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .tourism-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255,255,255,0.95);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            backdrop-filter: blur(10px);
+            z-index: 1;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .tourism-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tourism-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tourism-location {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .tourism-description {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 5%;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-info {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+            }
+
+            .hero-content {
+                padding: 2rem;
+            }
+
+            .hero-title h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-welcome {
+                font-size: 1.3rem;
+            }
+
+            .hero-description {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                padding: 1rem;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--primary);
+                cursor: pointer;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            #pemerintah, .pariwisata-content, .map-page {
+                padding: 2rem;
+            }
+
+            #google-map {
+                height: 400px;
+            }
+
+            .news-grid, .tourism-grid, .potensi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gov-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .news-title, .potensi-title, .tourism-title {
+                min-height: auto;
+            }
+
+            .map-container {
+                padding: 1.5rem;
+            }
+
+            .region-selector {
+                gap: 0.5rem;
+            }
+
+            .region-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        .loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Coat_of_arms_of_South_Sulawesi.svg" alt="Logo Provinsi Sulawesi Selatan">
+                <div>
+                    <div class="logo-text">SULAWESI SELATAN</div>
+                    <div class="logo-subtext">Negeri Seribu Benteng</div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="nav-link active" data-page="beranda">Beranda</a></li>
+                <li><a href="#" class="nav-link" data-page="peta">Peta</a></li>
+                <li><a href="#" class="nav-link" data-page="pemerintah">Pemerintah</a></li>
+                <li><a href="#" class="nav-link" data-page="potensi-daerah">Potensi Daerah</a></li>
+                <li><a href="#" class="nav-link" data-page="pariwisata">Pariwisata</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HALAMAN BERANDA -->
+    <div class="page active" id="beranda">
+        <section class="hero">
+            <!-- Carousel sebagai background dengan gambar pemandangan SULSEL -->
+            <div class="carousel-background">
+                <div class="carousel-wrapper" id="carouselWrapper">
+                    <!-- Slide 1 - Pantai Losari -->
+                    <div class="carousel-slide" style="background-image: url('https://cdn0-production-images-kly.akamaized.net/Ci9BltbpAfVnYWO4Vu3I1-1TxWM=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/903509/original/090335100_1434530516-kete_kesu3.jpg');">
+                        <div class="carousel-overlay"></div>
+                    </div>
+
+                    <!-- Slide 2 - Tana Toraja -->
+                    <div class="carousel-slide" style="background-image: url('https://imgsrv2.voi.id/UDTHiEMZT9tFO5SDOVtDiEo-VrxNlyd5nbe3VD3FAV4/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy8zODMwNS8yMDIxMDMxMDIyMzAtbWFpbi5qcGc.jpg');">
+                        <div class="carousel-overlay"></div>
+                    </div>
+
+                    <!-- Slide 3 - Fort Rotterdam -->
+                    <div class="carousel-slide" style="background-image: url('https://www.pesonaindo.com/wp-content/uploads/2016/04/Paket-Wisata-Explore-Sulawesi-Selatan-Pesona-Indonesia-Foto-Trip-1.jpg');">
+                        <div class="carousel-overlay"></div>
+                    </div>
+
+                    <!-- Slide 4 - Pulau Samalona -->
+                    <div class="carousel-slide" style="background-image: url('https://assets.pikiran-rakyat.com/crop/0x0:0x0/1200x675/photo/2023/07/20/1821455623.jpg');">
+                        <div class="carousel-overlay"></div>
+                    </div>
+
+                    <!-- Slide 5 - Gunung Bawakaraeng -->
+                    <div class="carousel-slide" style="background-image: url('https://thumb.viva.co.id/media/frontend/thumbs3/2022/09/01/63103d202384c-rumah-adat-suku-luwuk_1265_711.jpeg');">
+                        <div class="carousel-overlay"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content di atas carousel -->
+            <div class="hero-content">
+                <h1 class="hero-title">SULAWESI SELATAN</h1>
+                <div class="hero-welcome">"Mappadaelo mappasomba"</div>
+                
+                <p class="hero-description">
+                    Selamat datang di Portal Resmi Provinsi Sulawesi Selatan. Mari bersama menjelajahi keindahan alam, kekayaan budaya, dan potensi daerah yang menjadikan Sulsel sebagai salah satu provinsi terpenting di Indonesia Timur.
+                </p>
+
+                <a href="#" class="hero-btn" onclick="navigateToPage('pariwisata'); return false;">Jelajahi Sulawesi Selatan</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- HALAMAN PETA -->
+    <div class="page" id="peta">
+        <section class="map-page">
+            <h2 class="section-title">Peta Wilayah</h2>
+            <p class="section-subtitle">Jelajahi 24 kabupaten dan kota di Provinsi Sulawesi Selatan</p>
+            
+            <div class="map-container">
+                <!-- Google Maps Embed -->
+                <div id="google-map">
+                    <!-- Google Maps iframe akan dimasukkan oleh JavaScript -->
+                    <div id="map-loading" style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background: var(--gray-light); border-radius: 8px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2rem; color: var(--primary); margin-bottom: 1rem;">Memuat peta...</div>
+                            <div style="width: 50px; height: 50px; border: 4px solid var(--gray-light); border-top: 4px solid var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Region Selector -->
+                <div class="region-selector">
+                    <button class="region-btn active" data-region="sulsel">Sulawesi Selatan</button>
+                    <button class="region-btn" data-region="makassar">Makassar</button>
+                    <button class="region-btn" data-region="toraja">Tana Toraja</button>
+                    <button class="region-btn" data-region="parepare">Parepare</button>
+                    <button class="region-btn" data-region="palopo">Palopo</button>
+                </div>
+
+                <div class="map-info" id="map-info">
+                    <h3>Provinsi Sulawesi Selatan</h3>
+                    <p>Provinsi Sulawesi Selatan terdiri dari 24 kabupaten dan kota dengan luas wilayah 46.717,48 km². Provinsi ini dikenal sebagai "Negeri Seribu Benteng" dan memiliki populasi sekitar 8,9 juta jiwa. Sulawesi Selatan merupakan gerbang utama kawasan Timur Indonesia dengan Kota Makassar sebagai pusat perdagangan dan pelabuhan terbesar di kawasan ini.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- HALAMAN PEMERINTAH -->
+    <div class="page" id="pemerintah">
+        <section style="padding: 4rem 5%; max-width: 1400px; margin: 0 auto; min-height: 80vh;">
+            <h2 class="section-title">Pemerintah Daerah</h2>
+            <p class="section-subtitle">Struktur kepemimpinan dan informasi pemerintahan Provinsi Sulawesi Selatan</p>
+            
+            <div class="gov-container">
+                <div class="gov-info">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.5rem;">Tentang Pemerintah Daerah</h3>
+                    <p style="margin-bottom: 1.5rem; color: var(--gray);">Pemerintah Provinsi Sulawesi Selatan dipimpin oleh Gubernur dan Wakil Gubernur yang bertugas menjalankan pemerintahan daerah dengan visi "Sulawesi Selatan Unggul, Berdaya Saing, dan Bermartabat".</p>
+                    
+                    <h4 style="color: var(--secondary); margin: 2rem 0 1rem; font-size: 1.2rem;">Visi & Misi</h4>
+                    <p style="font-weight: 600; color: var(--dark); margin-bottom: 0.5rem;">Visi:</p>
+                    <p style="color: var(--gray); margin-bottom: 1.5rem;">"Sulawesi Selatan Unggul, Berdaya Saing, dan Bermartabat"</p>
+                    
+                    <p style="font-weight: 600; color: var(--dark); margin-bottom: 0.5rem;">Misi:</p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: var(--gray);">
+                        <li style="margin-bottom: 0.5rem;">Meningkatkan kualitas sumber daya manusia yang berdaya saing</li>
+                        <li style="margin-bottom: 0.5rem;">Membangun ekonomi daerah yang inklusif dan berkelanjutan</li>
+                        <li style="margin-bottom: 0.5rem;">Mengembangkan infrastruktur strategis yang terintegrasi</li>
+                        <li style="margin-bottom: 0.5rem;">Melestarikan nilai-nilai budaya dan kearifan lokal</li>
+                        <li>Mewujudkan tata kelola pemerintahan yang bersih dan akuntabel</li>
+                    </ul>
+                    
+                    <h4 style="color: var(--secondary); margin: 2rem 0 1rem; font-size: 1.2rem;">Kontak & Alamat</h4>
+                    <p style="margin-bottom: 0.5rem; color: var(--gray);"><strong style="color: var(--dark);">Alamat:</strong> Jl. Urip Sumoharjo No. 269, Makassar, Sulawesi Selatan 90111</p>
+                    <p style="margin-bottom: 0.5rem; color: var(--gray);"><strong style="color: var(--dark);">Telepon:</strong> (0411) 441111</p>
+                    <p style="margin-bottom: 0.5rem; color: var(--gray);"><strong style="color: var(--dark);">Email:</strong> humas@sulselprov.go.id</p>
+                    <p style="color: var(--gray);"><strong style="color: var(--dark);">Website:</strong> <a href="https://sulselprov.go.id" target="_blank" style="color: var(--primary); text-decoration: none;">sulselprov.go.id</a></p>
+                </div>
+                
+                <div class="gov-structure">
+                    <div class="gov-leader">
+                        <div class="gov-leader-img">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Official_Portrait_of_Andi_Sudirman_Sulaiman%2C_Governor_of_South_Sulawesi.jpg" alt="Bahtiar Baharuddin - Gubernur Sulawesi Selatan">
+                        </div>
+                        <h3>Andi Sudirman Sulaiman, S.T.</h3>
+                        <p>Gubernur Sulawesi Selatan</p>
+                        <div class="period">Periode 2025 - 2030</div>
+                    </div>
+                    
+                    <div class="gov-leader">
+                        <div class="gov-leader-img">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Official_Portrait_of_Fatmawati_Rusdi%2C_Deputy_Governor_of_South_Sulawesi.jpg" alt="Zudan Arif Fakrulloh - Wakil Gubernur Sulawesi Selatan">
+                        </div>
+                        <h3>Hj. Fatmawati Rusdi, M.M.</h3>
+                        <p>Wakil Gubernur Sulawesi Selatan</p>
+                        <div class="period">Periode 2025 - 2030</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Berita di halaman pemerintah -->
+            <div style="margin-top: 5rem;">
+                <h3 class="section-title" style="font-size: 1.8rem;">Berita & Informasi</h3>
+                <p class="section-subtitle">Update kegiatan dan program pemerintahan terkini</p>
+                
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://foto.kontan.co.id/DbOqBQM2mO72nAQZQooPVwUIfCY=/smart/filters:format(webp)/2024/02/22/1130457093.jpg');"></div>
+                        <div class="news-content">
+                            <div class="news-date">15 Januari 2024</div>
+                            <h3 class="news-title">Gubernur Resmikan Pembangunan Jalan Tol Makassar-Maros</h3>
+                            <p class="news-excerpt">Gubernur Sulawesi Selatan meresmikan pembangunan jalan tol Makassar-Maros sepanjang 35 km untuk meningkatkan konektivitas dan pertumbuhan ekonomi...</p>
+                            <a href="#" class="read-more">Baca Selengkapnya →</a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://brmp.pertanian.go.id/storage/assets/uploads/images/berita/B7gjJuqpyy3Sjhsl9NyePFFem4vUz76lziBDtm9f.jpg');"></div>
+                        <div class="news-content">
+                            <div class="news-date">10 Januari 2024</div>
+                            <h3 class="news-title">Program Peningkatan Produksi Beras di Sulsel</h3>
+                            <p class="news-excerpt">Pemerintah Provinsi meluncurkan program intensifikasi pertanian untuk meningkatkan produksi beras di wilayah Bone, Wajo, dan Soppeng...</p>
+                            <a href="#" class="read-more">Baca Selengkapnya →</a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-image" style="background-image: url('https://www.mediasulsel.com/wp-content/uploads/2022/08/IMG-20220831-WA0015.jpg');"></div>
+                        <div class="news-content">
+                            <div class="news-date">5 Januari 2024</div>
+                            <h3 class="news-title">Pengembangan Wisata Budaya di Tana Toraja</h3>
+                            <p class="news-excerpt">Pemprov Sulsel meningkatkan fasilitas wisata di Tana Toraja dengan pembangunan museum dan penginapan tradisional untuk menarik lebih banyak turis...</p>
+                            <a href="#" class="read-more">Baca Selengkapnya →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- HALAMAN POTENSI DAERAH -->
+    <div class="page" id="potensi-daerah">
+        <section style="padding: 4rem 5%; max-width: 1400px; margin: 0 auto; min-height: 80vh;">
+            <h2 class="section-title">Potensi Daerah</h2>
+            <p class="section-subtitle">Kekayaan alam dan potensi pengembangan Sulawesi Selatan</p>
+            
+            <div class="potensi-grid">
+                <div class="potensi-card">
+                    <div class="potensi-image" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20210902/pngtree-aerial-photography-of-green-rice-seedlings-in-beautiful-rural-agricultural-rice-image_786584.jpg');">
+                        <div class="potensi-icon">🌾</div>
+                    </div>
+                    <div class="potensi-content">
+                        <h3 class="potensi-title">Pertanian</h3>
+                        <p>Sulawesi Selatan sebagai lumbung padi nasional dengan berbagai komoditas unggulan:</p>
+                        <ul class="potensi-list">
+                            <li>Padi (sentra nasional)</li>
+                            <li>Jagung</li>
+                            <li>Kedelai</li>
+                            <li>Kacang tanah</li>
+                            <li>Sayuran dataran tinggi</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="potensi-card">
+                    <div class="potensi-image" style="background-image: url('https://geotimes.id/wp-content/uploads/2017/08/pexels-photo-6346633.jpeg');">
+                        <div class="potensi-icon">🐟</div>
+                    </div>
+                    <div class="potensi-content">
+                        <h3 class="potensi-title">Perikanan</h3>
+                        <p>Dengan garis pantai panjang dan perairan laut yang kaya:</p>
+                        <ul class="potensi-list">
+                            <li>Perikanan tangkap laut</li>
+                            <li>Budidaya tambak udang</li>
+                            <li>Rumput laut</li>
+                            <li>Ikan bandeng</li>
+                            <li>Kerang hijau</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="potensi-card">
+                    <div class="potensi-image" style="background-image: url('https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/995/2024/07/08/3ead97f4-0873-4225-882e-d60db856878c-2402086975.jpg');">
+                        <div class="potensi-icon">🏭</div>
+                    </div>
+                    <div class="potensi-content">
+                        <h3 class="potensi-title">Industri</h3>
+                        <p>Pengembangan kawasan industri dan pengolahan:</p>
+                        <ul class="potensi-list">
+                            <li>Industri pengolahan ikan</li>
+                            <li>Industri semen</li>
+                            <li>Pabrik pengolahan kakao</li>
+                            <li>Industri kapal Pinisi</li>
+                            <li>Industri makanan dan minuman</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="potensi-card">
+                    <div class="potensi-image" style="background-image: url('https://cdn0-production-images-kly.akamaized.net/Ci9BltbpAfVnYWO4Vu3I1-1TxWM=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/903509/original/090335100_1434530516-kete_kesu3.jpg');">
+                        <div class="potensi-icon">🏗️</div>
+                    </div>
+                    <div class="potensi-content">
+                        <h3 class="potensi-title">Pariwisata</h3>
+                        <p>Potensi wisata alam dan budaya yang besar:</p>
+                        <ul class="potensi-list">
+                            <li>Wisata budaya Tana Toraja</li>
+                            <li>Wisata bahari Kepulauan Spermonde</li>
+                            <li>Wisata sejarah Benteng Rotterdam</li>
+                            <li>Wisata alam Rammang-rammang</li>
+                            <li>Wisata kuliner Makassar</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="potensi-card">
+                    <div class="potensi-image" style="background-image: url('https://img.inews.co.id/media/620/files/inews_new/2023/06/23/plta_di_sulawesi_selatan.jpg');">
+                        <div class="potensi-icon">⚡</div>
+                    </div>
+                    <div class="potensi-content">
+                        <h3 class="potensi-title">Energi</h3>
+                        <p>Potensi energi yang melimpah:</p>
+                        <ul class="potensi-list">
+                            <li>Pembangkit Listrik Tenaga Air</li>
+                            <li>Energi panas bumi</li>
+                            <li>Pembangkit Listrik Tenaga Surya</li>
+                            <li>Energi angin pesisir</li>
+                            <li>Biomassa dari limbah pertanian</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="potensi-card">
+                    <div class="potensi-image" style="background-image: url('https://img.antaranews.com/cache/800x533/2023/06/02/CjkinzN007033_20230602_CBMFN0A004.jpg');">
+                        <div class="potensi-icon">🚢</div>
+                    </div>
+                    <div class="potensi-content">
+                        <h3 class="potensi-title">Maritim</h3>
+                        <p>Potensi kelautan dan pelayaran:</p>
+                        <ul class="potensi-list">
+                            <li>Pelabuhan Makassar (terbesar di timur)</li>
+                            <li>Pembangunan kapal tradisional</li>
+                            <li>Perikanan laut dalam</li>
+                            <li>Wisata pelayaran</li>
+                            <li>Logistik dan distribusi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- HALAMAN PARIWISATA -->
+    <div class="page" id="pariwisata">
+        <section class="pariwisata-content">
+            <h2 class="section-title">Destinasi Pariwisata</h2>
+            <p class="section-subtitle">Temukan keindahan alam dan budaya Sulawesi Selatan</p>
+            
+            <div class="tourism-grid">
+                <div class="tourism-card">
+                    <div class="tourism-image" style="background-image: url('https://zjglidcehtsqqqhbdxyp.supabase.co/storage/v1/object/public/atourin/images/destination/makassar/pantai-losari-profile1639625428.png?x-image-process=image/resize,p_100,limit_1/imageslim');">
+                        <div class="tourism-badge">Pantai</div>
+                    </div>
+                    <div class="tourism-content">
+                        <h3 class="tourism-title">Pantai Losari</h3>
+                        <div class="tourism-location">📍 Makassar</div>
+                        <p class="tourism-description">Pantai ikonik Makassar dengan pemandangan matahari terbenam yang indah. Tempat favorit untuk berolahraga dan kuliner seafood.</p>
+                    </div>
+                </div>
+
+                <div class="tourism-card">
+                    <div class="tourism-image" style="background-image: url('https://mediaim.expedia.com/localexpert/893351/b71b883e-7d7c-4734-9fd2-63bec6e976e7.jpg?impolicy=resizecrop&rw=1005&rh=565');">
+                        <div class="tourism-badge">Budaya</div>
+                    </div>
+                    <div class="tourism-content">
+                        <h3 class="tourism-title">Tana Toraja</h3>
+                        <div class="tourism-location">📍 Toraja</div>
+                        <p class="tourism-description">Destinasi budaya internasional dengan rumah adat Tongkonan, upacara Rambu Solo, dan pemandangan pegunungan yang memukau.</p>
+                    </div>
+                </div>
+
+                <div class="tourism-card">
+                    <div class="tourism-image" style="background-image: url('https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p2/221/2024/12/10/benteng-rotterdam-1954754543.jpg');">
+                        <div class="tourism-badge">Sejarah</div>
+                    </div>
+                    <div class="tourism-content">
+                        <h3 class="tourism-title">Benteng Rotterdam</h3>
+                        <div class="tourism-location">📍 Makassar</div>
+                        <p class="tourism-description">Benteng peninggalan Belanda yang menjadi museum sejarah dan budaya. Menyimpan koleksi artefak kerajaan Gowa-Tallo.</p>
+                    </div>
+                </div>
+
+                <div class="tourism-card">
+                    <div class="tourism-image" style="background-image: url('https://makaraeng.id/wp-content/uploads/2024/10/PulauSangkarang.jpg');">
+                        <div class="tourism-badge">Pulau</div>
+                    </div>
+                    <div class="tourism-content">
+                        <h3 class="tourism-title">Kepulauan Spermonde</h3>
+                        <div class="tourism-location">📍 Pangkep</div>
+                        <p class="tourism-description">Gugusan pulau dengan keindahan bawah laut yang memukau. Spot snorkeling dan diving terbaik di Sulawesi Selatan.</p>
+                    </div>
+                </div>
+
+                <div class="tourism-card">
+                    <div class="tourism-image" style="background-image: url('https://indomgb.s3.amazonaws.com/wp-content/uploads/2022/04/22025501/iwan-dento-02.jpeg');">
+                        <div class="tourism-badge">Pegunungan</div>
+                    </div>
+                    <div class="tourism-content">
+                        <h3 class="tourism-title">Rammang-rammang</h3>
+                        <div class="tourism-location">📍 Maros</div>
+                        <p class="tourism-description">Kawasan karst terbesar ketiga di dunia dengan tebing batu kapur yang megah. Cocok untuk fotografi dan petualangan.</p>
+                    </div>
+                </div>
+
+                <div class="tourism-card">
+                    <div class="tourism-image" style="background-image: url('https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/36/2024/04/16/IMG-20240413-WA0013-2522469530.jpg');">
+                        <div class="tourism-badge">Bahari</div>
+                    </div>
+                    <div class="tourism-content">
+                        <h3 class="tourism-title">Pantai Bira</h3>
+                        <div class="tourism-location">📍 Bulukumba</div>
+                        <p class="tourism-description">Pantai dengan pasir putih yang halus dan air laut biru kehijauan. Pusat pembuatan kapal Pinisi tradisional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" onclick="navigateToPage('beranda'); return false;">Beranda</a>
+                <a href="#" onclick="navigateToPage('peta'); return false;">Peta</a>
+                <a href="#" onclick="navigateToPage('pemerintah'); return false;">Pemerintah</a>
+                <a href="#" onclick="navigateToPage('potensi-daerah'); return false;">Potensi Daerah</a>
+                <a href="#" onclick="navigateToPage('pariwisata'); return false;">Pariwisata</a>
+                <a href="https://sulselprov.go.id" target="_blank">Website Resmi</a>
+            </div>
+            
+            <div class="footer-info">
+                <p>© 2024 Pemerintah Provinsi Sulawesi Selatan. Hak Cipta Dilindungi.</p>
+                <p style="margin-top: 0.5rem;">Jl. Urip Sumoharjo No. 269, Makassar, Sulawesi Selatan 90111 | Telp: (0411) 441111 | Email: humas@sulselprov.go.id</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel Functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const wrapper = document.getElementById('carouselWrapper');
+        const totalSlides = slides.length;
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            if (wrapper) {
+                wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+        }
+
+        // Auto-play carousel every 5 seconds
+        let carouselInterval = setInterval(nextSlide, 5000);
+
+        // Page Navigation System
+        function navigateToPage(pageName) {
+            // Sembunyikan semua halaman
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Tampilkan halaman yang dipilih
+            const selectedPage = document.getElementById(pageName);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
+
+            // Update active state di navbar
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageName) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Tutup mobile menu jika terbuka
+            const navLinksElement = document.getElementById('navLinks');
+            if (navLinksElement) {
+                navLinksElement.classList.remove('active');
+            }
+
+            // Scroll ke atas
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Jika navigasi ke halaman peta, tunggu sebentar lalu load Google Maps
+            if (pageName === 'peta') {
+                setTimeout(loadGoogleMap, 300);
+            }
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            if (navLinks) {
+                navLinks.classList.toggle('active');
+            }
+        }
+
+        // Google Maps Configuration
+        function loadGoogleMap(region = 'sulsel') {
+            const mapContainer = document.getElementById('google-map');
+            const mapLoading = document.getElementById('map-loading');
+            const mapInfo = document.getElementById('map-info');
+            
+            // Koordinat untuk berbagai wilayah di Sulawesi Selatan
+            const regions = {
+                'sulsel': {
+                    center: { lat: -4.695135, lng: 120.166000 }, // Tengah Sulsel
+                    zoom: 8,
+                    title: 'Provinsi Sulawesi Selatan',
+                    description: 'Provinsi Sulawesi Selatan terdiri dari 24 kabupaten dan kota dengan luas wilayah 46.717,48 km². Provinsi ini dikenal sebagai "Negeri Seribu Benteng" dan memiliki populasi sekitar 8,9 juta jiwa. Sulawesi Selatan merupakan gerbang utama kawasan Timur Indonesia dengan Kota Makassar sebagai pusat perdagangan dan pelabuhan terbesar di kawasan ini.'
+                },
+                'makassar': {
+                    center: { lat: -5.147665, lng: 119.432732 }, // Kota Makassar
+                    zoom: 13,
+                    title: 'Kota Makassar',
+                    description: 'Ibu kota Provinsi Sulawesi Selatan dan kota terbesar di kawasan Indonesia Timur. Makassar dikenal dengan Pelabuhan Makassar yang menjadi gerbang utama perdagangan di kawasan timur Indonesia. Kota ini juga terkenal dengan Pantai Losari, Benteng Rotterdam, dan kulinernya yang khas.'
+                },
+                'toraja': {
+                    center: { lat: -2.999743, lng: 119.897667 }, // Tana Toraja
+                    zoom: 12,
+                    title: 'Kabupaten Tana Toraja',
+                    description: 'Destinasi wisata budaya internasional yang terkenal dengan rumah adat Tongkonan, upacara pemakaman Rambu Solo, dan keindahan alam pegunungannya. Tana Toraja merupakan salah satu warisan budaya terpenting Indonesia yang telah diakui dunia.'
+                },
+                'parepare': {
+                    center: { lat: -4.012372, lng: 119.624416 }, // Kota Parepare
+                    zoom: 13,
+                    title: 'Kota Parepare',
+                    description: 'Kota pelabuhan penting di jalur trans Sulawesi. Parepare dikenal sebagai kota kelahiran Presiden ke-3 Indonesia, BJ Habibie. Kota ini memiliki pantai yang indah dan menjadi pusat perdagangan di wilayah utara Sulawesi Selatan.'
+                },
+                'palopo': {
+                    center: { lat: -2.991108, lng: 120.195087 }, // Kota Palopo
+                    zoom: 13,
+                    title: 'Kota Palopo',
+                    description: 'Kota terbesar ketiga di Sulawesi Selatan yang terletak di Teluk Bone. Palopo merupakan kota dengan sejarah Kerajaan Luwu yang kaya akan budaya dan tradisi. Kota ini juga menjadi pusat perdagangan kakao dan hasil perkebunan lainnya.'
+                }
+            };
+
+            // Hapus iframe yang sudah ada
+            const existingIframe = mapContainer.querySelector('iframe');
+            if (existingIframe) {
+                existingIframe.remove();
+            }
+
+            // Buat iframe Google Maps baru
+            const selectedRegion = regions[region];
+            const iframe = document.createElement('iframe');
+            
+            iframe.src = `https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(selectedRegion.title)}&center=${selectedRegion.center.lat},${selectedRegion.center.lng}&zoom=${selectedRegion.zoom}&maptype=roadmap`;
+            iframe.width = '100%';
+            iframe.height = '600';
+            iframe.style.border = '0';
+            iframe.style.borderRadius = '8px';
+            iframe.loading = 'lazy';
+            iframe.referrerpolicy = 'no-referrer-when-downgrade';
+            iframe.allowFullscreen = true;
+
+            // Sembunyikan loading dan tampilkan iframe
+            if (mapLoading) {
+                mapLoading.style.display = 'none';
+            }
+            mapContainer.appendChild(iframe);
+
+            // Update info peta
+            if (mapInfo) {
+                mapInfo.innerHTML = `
+                    <h3>${selectedRegion.title}</h3>
+                    <p>${selectedRegion.description}</p>
+                `;
+            }
+
+            // Update active button
+            document.querySelectorAll('.region-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-region') === region) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Event listeners untuk navbar links
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageName = this.getAttribute('data-page');
+                    navigateToPage(pageName);
+                });
+            });
+
+            // Event listeners untuk region buttons
+            document.querySelectorAll('.region-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const region = this.getAttribute('data-region');
+                    loadGoogleMap(region);
+                });
+            });
+
+            // Load Google Maps jika halaman peta aktif
+            if (document.getElementById('peta').classList.contains('active')) {
+                setTimeout(loadGoogleMap, 300);
+            }
+
+            // Scroll Animations untuk cards
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.news-card, .tourism-card, .potensi-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // CSS untuk animasi loading
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
